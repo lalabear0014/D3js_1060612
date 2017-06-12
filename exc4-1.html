@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<body>
+  <script>
+      var arr = [85, 60, 99, 49, 77, 59];
+      
+      var body = d3.select("body");
+      
+      for(var i=0;i<arr.length;i++) {
+          if(arr[i]<60)
+              body.append("div").text(arr[i]).style({ color: "red" });
+          else
+              body.append("div").text(arr[i]).style({ color: "green" });
+      }
+  </script>
+</body>
+</html>

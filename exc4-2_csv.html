@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<body>
+<!--solution1-->
+   <script>
+      d3.csv("invoice-taipei.csv", mid, function(dataSet){
+          console.table(dataSet);
+          var body = d3.select("body");
+          
+          for(var i=0; i<dataSet.length; i++){
+              if(dataSet[i].number > 10000000){
+                  body.append("div").text(dataSet[i].industry+","+dataSet[i].number);
+              }
+          }
+      });
+      
+      function mid(d) {
+          d.number = +d.number;
+          d.amount = +d.amount;
+          return d;
+      }
+  </script>
+<!--solution2-->
+  <script>
+      d3.csv("invoice-taipei.csv", mid, function(dataSet){
+          console.table(dataSet);
+          var body = d3.select("body");
+          
+          var fDataSet = dataSet.filter(function(d){
+              return d.number > 10000000;
+          });
+          
+          for(var i=0; i<fDataSet.length; i++){
+              body.append("div").text(dataSet[i].industry+","+dataSet[i].number);
+          }
+      });
+      
+      function mid(d) {
+          d.number = +d.number;
+          d.amount = +d.amount;
+          return d;
+      }
+  </script>
+</body>
+</html>
