@@ -34,6 +34,33 @@
         });
     </script>
     <hr>
+    <script>
+        var arr = [85, 60, 99, 49, 77, 59, 97, 43, 12];
+
+        bind(arr);
+        render();
+
+        function bind(dataSet){
+            var selection = d3.select("body").selectAll("div").data(arr);
+            selection.enter().append("div");
+            selection.exit().remove();
+        }
+
+        function render(){
+            d3.selectAll("body>div").text(function(d, i){ return (i+1)+":"+d; })
+              .style({
+                color: function(d){ 
+                    if(d<70)
+                        return "red";
+                    else
+                        return "black";
+                }
+              });
+        }
+
+        var selection = d3.select("body").selectAll("div").data(arr);
+    </script>
+    <hr>
     <input type="button" value="新增" onclick="update()">
     <input type="button" value="移除" onclick="delete_num()">
     <script>
