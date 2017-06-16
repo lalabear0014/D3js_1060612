@@ -136,5 +136,14 @@
             render();
         }
     </script>
+    <hr>
+    <script>
+      var index = ["中國國民黨","民主進步黨","時代力量","無黨團結聯盟","親民黨"];
+      var color = ["blue","green","yellow","gray","orange"];
+      var xScale = d3.scale.ordinal()
+                    .domain(index)
+                    .range(color);
+      console.log(xScale("共產黨"));
+    </script>  
 </body>
 </html>
