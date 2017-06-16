@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<body>
+  <input type="button" value="新增" onclick="update()">
+  <input type="button" value="移除" onclick="delete_num()">
+  <script>
+      var arr = [85, 60, 99, 49, 77, 89, 60, 43, 12];
+      var w = 900,
+          h = 500,
+          p = 100;
+      
+      svg();
+      bind(arr);
+      render();
+      
+      function svg(){
+          d3.select("body").append("svg").attr({
+              width: w,
+              height: h,
+              id: "bar-chart" 
+          });
+      }
+      
+      function bind(dataSet){
+          // rect
+          var selection = d3.select("svg#bar-chart").selectAll("rect").data(arr);
+          selection.enter().append("rect");
+          selection.exit().remove();
+          
+          // text
+          var selection = d3.select("svg#bar-chart").selectAll("text").data(arr);
+          selection.enter().append("text");
+          selection.exit().remove();
+      }
+      
+      function render(){
+          // rect
+          d3.selectAll("#bar-chart>rect").attr({
+              x: function(d,i){ return p+45*i; },
+              y: function(d){ return h-p-d; },
+              width: 40,
+              height: function(d){ return d; },
+              fill: function(d){ 
+                  if(d<70)
+                      return "red";
+                  else
+                      return "lightgreen";
+              }
+          })
+          
+          // text
+          d3.selectAll("#bar-chart>text").attr({
+              x: function(d,i){ return p+45*i+10; },
+              y: function(d){ return h-p+20; },
+              width: 40,
+              height: function(d){ return d; }
+              
+          })
+          .text(function(d){ return d; })
+      }
+      
+      function update(){
+          var num = random(10,100);
+          
+          arr.push(num);
+          bind(arr);
+          render();
+      }   
+      function random(n,m){
+          var rScale = d3.scale.linear()
+                               .domain([0,1])
+                               .rangeRound([n,m]);
+          return rScale(Math.random());
+      }
+      
+      function delete_num(){
+          arr.shift();
+          bind(arr);
+          render();
+      }
+  </script>
+</body>
+</html>

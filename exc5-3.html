@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<body>
+  <script>
+      var arr = [85, 60, 99, 49, 77, 59, 97, 43, 12];
+      
+      bind(arr);
+      render();
+      
+      function bind(dataSet){
+          var selection = d3.select("body").selectAll("div").data(arr);
+          selection.enter().append("div");
+          selection.exit().remove();
+      }
+      
+      function render(){
+          d3.selectAll("body>div").text(function(d, i){ return (i+1)+":"+d; })
+            .style({
+              color: function(d){ 
+                  if(d<70)
+                      return "red";
+                  else
+                      return "black";
+              }
+            });
+      }
+      
+      var selection = d3.select("body").selectAll("div").data(arr);
+  </script>
+</body>
+</html>

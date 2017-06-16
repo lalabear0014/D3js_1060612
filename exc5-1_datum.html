@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<body>
+  <script>
+      var arr = [85, 60, 99, 49, 77, 59, 97];
+      
+      for(var i=0;i<arr.length;i++) {
+          d3.select("body").append("div").datum(arr[i]).text(function(d){
+              return d;
+          });
+      }
+      
+      console.log(d3.selectAll("div"));
+  </script>
+</body>
+</html>

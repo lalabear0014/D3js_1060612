@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<body>
+  <script>
+      // 目前的情況是標籤<div>不足...
+      var arr = [85, 60, 99, 49, 77, 59, 97, 43, 12];
+      
+      bind(arr);
+      render();
+      
+      function bind(dataSet){
+          var selection = d3.select("body").selectAll("div").data(arr);
+          selection.enter().append("div");
+          selection.exit().remove();
+      }
+      
+      function render(){
+          d3.selectAll("body>div").text(function(d){ return d; });
+      }
+      
+      var selection = d3.select("body").selectAll("div").data(arr);
+      
+//      // 一對一，須有標籤<div>才有作用============>不執行
+//      selection.text(function(d){ return d; });
+//      
+//      // 新增div+內容============>執行
+//      selection.enter().append("div").text(function(d){ return d; });
+//      
+//      // 離開可視化，把多的標籤<div>刪除============>不執行
+//      selection.exit().remove();
+//      
+//      console.log(d3.selectAll("div"));
+  </script>
+</body>
+</html>
